@@ -63,4 +63,20 @@ describe("/api/articles/:article_id", () => {
         expect(body.msg).toBe("Invalid id");
       });
   });
+
+  describe.only("/api/articles", () => {
+    test("GET - 200: responds with array of article objects", () => {
+      return request(app)
+        .get("/api/articles")
+        .expect(200)
+        .then(({ body }) => {
+          body.article.forEach((element) => {
+            expect(element).toMatchObject({
+              author: expect.any(String),
+              title: expect.any(String),
+            });
+          });
+        });
+    });
+  });
 });
