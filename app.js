@@ -4,8 +4,11 @@ const {
   getArticleById,
   getArticles,
 } = require("./controllers/article.controller");
+const cors = require("cors");
 
 const app = express();
+
+app.use(cors());
 
 app.get("/api/topics", getTopics);
 
