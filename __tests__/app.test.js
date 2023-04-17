@@ -64,7 +64,7 @@ describe("/api/articles/:article_id", () => {
       });
   });
 
-  describe.only("/api/articles", () => {
+  describe("/api/articles", () => {
     test("GET - 200: responds with array of article objects", () => {
       return request(app)
         .get("/api/articles")

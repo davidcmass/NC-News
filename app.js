@@ -13,6 +13,8 @@ app.get("/api/articles/:article_id", getArticleById);
 
 app.get("/api/articles", getArticles);
 
+// app.get("/api/articles/:article_id/comments", getComments);
+
 // Errors
 app.use((err, req, res, next) => {
   if (err.code === "22P02") res.status(400).send({ msg: "Bad request" });
