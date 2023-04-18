@@ -5,6 +5,7 @@ const {
   getArticles,
 } = require("./controllers/article.controller");
 const cors = require("cors");
+const { getUsers } = require("./controllers/user.controller");
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get("/api/articles/:article_id", getArticleById);
 
 app.get("/api/articles", getArticles);
 
-// app.get("/api/articles/:article_id/comments", getComments);
+app.get("/api/users", getUsers);
 
 // Errors
 app.use((err, req, res, next) => {
