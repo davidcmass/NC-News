@@ -80,3 +80,25 @@ describe("/api/articles/:article_id", () => {
     });
   });
 });
+
+describe("GET /api/users", () => {
+  test("Responds with array of users", () => {
+    return request(app)
+      .get("/api/users")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.users.length).toBe(4);
+      });
+  });
+});
+
+describe("GET /api/articles/:article_id/comments", () => {
+  test("200: accepts a article_id responds with comments", () => {
+    return request(app)
+      .get("/api/articles/1/comments")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments).toBeInstanceOf(Array);
+      });
+  });
+});

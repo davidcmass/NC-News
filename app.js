@@ -3,6 +3,7 @@ const { getTopics } = require("./controllers/topics.controller");
 const {
   getArticleById,
   getArticles,
+  getComments,
 } = require("./controllers/article.controller");
 const cors = require("cors");
 const { getUsers } = require("./controllers/user.controller");
@@ -18,6 +19,8 @@ app.get("/api/articles/:article_id", getArticleById);
 app.get("/api/articles", getArticles);
 
 app.get("/api/users", getUsers);
+
+app.get("/api/articles/:article_id/comments", getComments);
 
 // Errors
 app.use((err, req, res, next) => {
