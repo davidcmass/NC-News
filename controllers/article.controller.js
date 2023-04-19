@@ -2,6 +2,7 @@ const {
   fetchArticleById,
   fetchArticles,
   fetchComments,
+  addVotes,
 } = require("../models/article.model");
 
 exports.getArticleById = (req, res, next) => {
@@ -31,6 +32,19 @@ exports.getComments = (req, res, next) => {
   fetchComments(article_id)
     .then((result) => {
       res.status(200).send({ comments: result });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.patchVotes = (req, res, next) => {
+  const { article_id } = req.params;
+  const { inc_votes } = req.body;
+
+  addVotes(article_id, inc_votes)
+    .then((result) => {
+      res.status(200).send({ votes: result });
     })
     .catch((err) => {
       next(err);
