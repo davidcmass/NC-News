@@ -52,7 +52,7 @@ exports.addVotes = (article_id, inc_votes) => {
       `,
       [inc_votes, article_id]
     )
-    .then((result) => {
-      return result.rows[0];
+    .then(({ rows }) => {
+      return rows[0];
     });
 };

@@ -102,3 +102,30 @@ describe("GET /api/articles/:article_id/comments", () => {
       });
   });
 });
+
+describe("PATCH /api/articles/:article_id/", () => {
+  test("200: Update articles votes", () => {
+    const votes = {
+      inc_votes: 10,
+    };
+
+    return request(app)
+      .patch("/api/articles/8")
+      .send({ inc_votes: 10 })
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.votes);
+        expect(body.votes).toEqual({
+          article_id: 8,
+          title: "Does Mitch predate civilisation?",
+          topic: "mitch",
+          author: "icellusedkars",
+          body: "Archaeologists have uncovered a gigantic statue from the dawn of humanity, and it has an uncanny resemblance to Mitch. Surely I am not the only person who can see this?!",
+          created_at: "2020-04-17T01:08:00.000Z",
+          votes: 10,
+          article_img_url:
+            "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+        });
+      });
+  });
+});
