@@ -5,6 +5,7 @@ const {
   getArticles,
   getComments,
   patchVotes,
+  postComments,
 } = require("./controllers/article.controller");
 const cors = require("cors");
 const { getUsers } = require("./controllers/user.controller");
@@ -26,6 +27,8 @@ app.get("/api/users", getUsers);
 app.get("/api/articles/:article_id/comments", getComments);
 
 app.patch("/api/articles/:article_id", patchVotes);
+
+app.post("/api/articles/:article_id/comments", postComments);
 
 // Errors
 app.use((err, req, res, next) => {

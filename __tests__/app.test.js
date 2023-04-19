@@ -105,16 +105,11 @@ describe("GET /api/articles/:article_id/comments", () => {
 
 describe("PATCH /api/articles/:article_id/", () => {
   test("200: Update articles votes", () => {
-    const votes = {
-      inc_votes: 10,
-    };
-
     return request(app)
       .patch("/api/articles/8")
       .send({ inc_votes: 10 })
       .expect(200)
       .then(({ body }) => {
-        console.log(body.votes);
         expect(body.votes).toEqual({
           article_id: 8,
           title: "Does Mitch predate civilisation?",
@@ -125,6 +120,26 @@ describe("PATCH /api/articles/:article_id/", () => {
           votes: 10,
           article_img_url:
             "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+        });
+      });
+  });
+});
+
+describe("POST /api/articles/:article_id/comments", () => {
+  test("201: Returns comments", () => {
+    return request(app)
+      .post("/api/articles/8/comments")
+      .send({ username: "butter_bridge", body: "Hey" })
+      .expect(201)
+      .then(({ body }) => {
+        console.log(body.comment[0]);
+        expect(body.comment[0]).toEqual({
+          author: "butter_bridge",
+          body: "Hey",
+          article_id: 8,
+          comment_id: expect.any(Number),
+          created_at: expect.any(String),
+          votes: expect.any(Number),
         });
       });
   });
