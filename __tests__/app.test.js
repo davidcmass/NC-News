@@ -159,3 +159,15 @@ describe("DELETE /api/comments/:comment_id", () => {
       });
   });
 });
+
+describe("GET /api/articles topic", () => {
+  test("Returns articles with chosen topic", () => {
+    return request(app)
+      .get("/api/articles?topic=cats")
+      .expect(200)
+      .then(({ body }) => {
+        console.log(body.topic[0].topic);
+        expect(body.topic[0].topic).toBe("cats");
+      });
+  });
+});

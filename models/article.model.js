@@ -73,3 +73,11 @@ exports.removeComment = (comment_id) => {
     comment_id,
   ]);
 };
+
+exports.sendArticleTopics = (topic) => {
+  return db
+    .query(`SELECT * FROM articles WHERE topic = $1;`, [topic])
+    .then(({ rows }) => {
+      return rows;
+    });
+};

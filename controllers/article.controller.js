@@ -5,6 +5,7 @@ const {
   addVotes,
   addComments,
   removeComment,
+  sendArticleTopics,
 } = require("../models/article.model");
 
 exports.getArticleById = (req, res, next) => {
@@ -19,13 +20,21 @@ exports.getArticleById = (req, res, next) => {
 };
 
 exports.getArticles = (req, res, next) => {
-  fetchArticles()
-    .then((result) => {
+  const { topic } = req.query;
+
+  if (!topic) {
+    fetchArticles().then((result) => {
       res.status(200).send({ article: result });
-    })
-    .catch((err) => {
-      next(err);
     });
+  } else if (topic) {
+    sendArticleTopics(topic)
+      .then((result) => {
+        res.status(200).send({ topic: result });
+      })
+      .catch((err) => {
+        next(err);
+      });
+  }
 };
 
 exports.getComments = (req, res, next) => {
