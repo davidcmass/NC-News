@@ -132,7 +132,6 @@ describe("POST /api/articles/:article_id/comments", () => {
       .send({ username: "butter_bridge", body: "Hey" })
       .expect(201)
       .then(({ body }) => {
-        console.log(body.comment[0]);
         expect(body.comment[0]).toEqual({
           author: "butter_bridge",
           body: "Hey",
@@ -141,6 +140,22 @@ describe("POST /api/articles/:article_id/comments", () => {
           created_at: expect.any(String),
           votes: expect.any(Number),
         });
+      });
+  });
+});
+
+describe("DELETE /api/comments/:comment_id", () => {
+  it("Deletes comment", () => {
+    return request(app)
+      .delete("/api/comments/5")
+      .expect(204)
+      .then(() => {
+        return request(app)
+          .get("/api/articles/1/comments")
+          .expect(200)
+          .then(({ body }) => {
+            console.log(body);
+          });
       });
   });
 });
