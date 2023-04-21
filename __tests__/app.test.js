@@ -70,7 +70,7 @@ describe("/api/articles/:article_id", () => {
         .get("/api/articles")
         .expect(200)
         .then(({ body }) => {
-          body.article.forEach((element) => {
+          body.result.forEach((element) => {
             expect(element).toMatchObject({
               author: expect.any(String),
               title: expect.any(String),
@@ -166,8 +166,7 @@ describe("GET /api/articles topic", () => {
       .get("/api/articles?topic=cats")
       .expect(200)
       .then(({ body }) => {
-        console.log(body.topic[0].topic);
-        expect(body.topic[0].topic).toBe("cats");
+        expect(body.result[0].topic).toBe("cats");
       });
   });
 });

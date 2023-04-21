@@ -24,12 +24,12 @@ exports.getArticles = (req, res, next) => {
 
   if (!topic) {
     fetchArticles().then((result) => {
-      res.status(200).send({ article: result });
+      res.status(200).send({ result });
     });
   } else if (topic) {
     sendArticleTopics(topic)
       .then((result) => {
-        res.status(200).send({ topic: result });
+        res.status(200).send({ result });
       })
       .catch((err) => {
         next(err);
