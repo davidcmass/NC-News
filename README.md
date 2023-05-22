@@ -1,5 +1,7 @@
 # NC News Back-End
 
+Built with ❤️ by [DavidMass](https://github.com/davidcmass)
+
 This is the back-end repository for the NC News project. It provides a RESTful API for the nc-news-fe (front-end) application.
 
 ## Key Features
